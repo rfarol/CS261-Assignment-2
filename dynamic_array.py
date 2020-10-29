@@ -104,9 +104,9 @@ class DynamicArray:
         if index >= self.size or index < 0: # checks if index is bigger than the size or 0, returns exception
             raise DynamicArrayException()
         if self.size < self.capacity/4: # checks if elements is less than 1/4 the capacity
-            if self.capacity <= 14: # since the capacity is intialized at 4, it cant go lower than 14.
-                self.capacity = 10 # if lower than 14, capacity will stay at 10
-            else:
+            if 1 < self.size < 5: # checks if the size is lower than 5
+                self.capacity = 10 # if size is lower than 5, capacity will stay at 10
+            elif self.size >=5:
                 self.capacity = self.size * 2 # else capacity will be reduced to double the size of current elements
         if index == self.size - 1: # checks if the index is at the end of the list
             self.data[index] = 0 # sets index to 0
