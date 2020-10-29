@@ -80,7 +80,7 @@ class DynamicArray:
 
     def insert_at_index(self, index: int, value: object) -> None:
         """inserts at index within the dynamic array"""
-        if index > self.size: # checks if index is bigger than the size, returns function
+        if index > self.size or index < 0: # checks if index is bigger than the size, returns function
             raise DynamicArrayException()
         elif self.size == self.capacity:  # checks if array is full and doubles the capacity
             self.resize(2 * self.capacity)
