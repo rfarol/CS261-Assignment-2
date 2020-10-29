@@ -1,8 +1,8 @@
 # Course: CS261 - Data Structures
 # Student Name: Ryan Farol
 # Assignment: Assignment 2
-# Description:
-# Last revised:
+# Description: DynamicArray class with multiple methods
+# Last revised: 10/28/2020
 
 
 from static_array import *
@@ -156,14 +156,22 @@ class DynamicArray:
         return new_array
         pass
 
-    def reduce(self, reduce_func, initializer=None) -> object:
-        result = 0
-        for i in range(0, self.size):
-            reduce_func(self.data[i], self.data[i+1])
-            result +=1
-            return result
-        pass
 
+    def reduce(self, reduce_func, initializer=None) -> object:
+        """returns the result of the reduce_func and has an initializer variable to determine what is outputed"""
+        result = 0 # initialize result at 0
+        if self.size == 0: # if self.size is 0 return initializer
+            return initializer
+        if initializer == None: # if None, index at the start of the array and keep adding until fully interated
+            result = self.data[0]
+            for i in range(1, self.size):
+               result = result + reduce_func(0, self.data[i])
+            return result
+        else:
+            result = result + initializer # if there is an initializer, index at it at the start
+            for i in range(0, self.size): # start the iteration from index 0 and iterate throughout the entire array
+                result = result + reduce_func(0, self.data[i])
+            return result
 
 
 
