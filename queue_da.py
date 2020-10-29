@@ -1,7 +1,7 @@
 # Course: CS261 - Data Structures
 # Student Name: Ryan Farol
 # Assignment: Assignment 2
-# Description: Queue Da: enqueue and dequeue
+# Description: Queue Dynamic Arrays: enqueue and dequeue
 # Last revised: 10/29/2020
 
 from dynamic_array import *
