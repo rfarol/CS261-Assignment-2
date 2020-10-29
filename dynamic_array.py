@@ -162,7 +162,7 @@ class DynamicArray:
         result = 0 # initialize result at 0
         if self.size == 0: # if self.size is 0 return initializer
             return initializer
-        if initializer == None: # if None, index at the start of the array and keep adding until fully interated
+        if initializer is None: # if None, index at the start of the array and keep adding until fully interated
             result = self.data[0]
             for i in range(1, self.size):
                result = result + reduce_func(0, self.data[i])
