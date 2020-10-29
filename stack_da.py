@@ -1,8 +1,8 @@
 # Course: CS261 - Data Structures
-# Student Name:
-# Assignment:
-# Description:
-# Last revised:
+# Student Name: Ryan Farol
+# Assignment: Assignment 2
+# Description: Stack DA: Add, Push, Pop, Top
+# Last revised: 10/29/2020
 
 from dynamic_array import *
 
@@ -48,21 +48,26 @@ class Stack:
         return self.da.length()
 
     def push(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """push function adds the values into the dynamic array"""
+        self.da.append(value)
         pass
 
     def pop(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """pop function removes the top element of the stack and returns it. If the stack is empty, it raises Stack
+        Exception"""
+        if self.size() == 0: # if size of array is 0, raise exception
+            raise StackException
+        else:
+            top_stack = self.da.get_at_index(self.size()-1) # initialize the top of the stack (last element)
+            self.da.remove_at_index(self.size()-1) # remove it
+        return top_stack # return variable
         pass
 
     def top(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """top function returns the top of stack without removing it"""
+        if self.size() == 0:  # if size of array is 0, raise exception
+            raise StackException
+        return self.da.get_at_index(self.size()-1) # return the top of the stack (last element)
         pass
 
 
