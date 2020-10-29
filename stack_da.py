@@ -55,7 +55,7 @@ class Stack:
     def pop(self) -> object:
         """pop function removes the top element of the stack and returns it. If the stack is empty, it raises Stack
         Exception"""
-        if self.size() == 0: # if size of array is 0, raise exception
+        if self.is_empty()== True: # if size of array is 0, raise exception
             raise StackException
         else:
             top_stack = self.da.get_at_index(self.size()-1) # initialize the top of the stack (last element)
@@ -65,7 +65,7 @@ class Stack:
 
     def top(self) -> object:
         """top function returns the top of stack without removing it"""
-        if self.size() == 0:  # if size of array is 0, raise exception
+        if self.is_empty()== True:  # if size of array is 0, raise exception
             raise StackException
         return self.da.get_at_index(self.size()-1) # return the top of the stack (last element)
         pass
