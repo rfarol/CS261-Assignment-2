@@ -64,8 +64,12 @@ class DynamicArray:
             return
         else:
             new_array = StaticArray(new_capacity) # create new static array with new capacity
-            for i in range(self.size): # scans old array
-                new_array[i] = self.data[i] # moves elements to new array
+            if new_capacity > self.data.size(): # checks if new capacity is greater than current capacity of array
+                for i in range(self.size): # scans old array
+                    new_array[i] = self.data[i] # moves elements to new array
+            else:
+                for i in range(new_array.size()):  # scans old array
+                    new_array[i] = self.data[i]  # moves elements to new array
             self.data = new_array # initializes new array
             self.capacity = new_capacity # initialize new capacity
         pass
