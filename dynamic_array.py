@@ -61,7 +61,7 @@ class DynamicArray:
         """resizes the capacity of the dynamic array. If new_capacity is 0 or < size, it passes/exits.
         Updates the capacity in the data variable as well."""
         if new_capacity <= self.size or new_capacity < 0: # passes if new capacity is 0 or less than size
-            pass
+            return
         else:
             new_array = StaticArray(new_capacity) # create new static array with new capacity
             for i in range(self.size): # scans old array
