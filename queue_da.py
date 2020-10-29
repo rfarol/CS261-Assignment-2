@@ -48,15 +48,19 @@ class Queue:
         return self.da.length()
 
     def enqueue(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """enqueue function adds the values to end of the list"""
+        self.da.append(value)
         pass
 
     def dequeue(self) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """dequeue function removes the first element of the que and returns it. If the stack is empty, it raises Queue
+        Exception"""
+        if self.is_empty()== True: # if size of array is 0, raise exception
+            raise QueueException
+        else:
+            first_que = self.da.get_at_index(0) # initialize the first value of the que)
+            self.da.remove_at_index(0) # remove it
+        return first_que # return variable
         pass
 
 
