@@ -1,8 +1,8 @@
 # Course: CS261 - Data Structures
-# Student Name:
-# Assignment:
-# Description:
-# Last revised:
+# Student Name: Ryan Farol
+# Assignment: Assignment 2
+# Description: Bag Dynamic Array
+# Last revised: 10/29/20
 
 from dynamic_array import *
 
@@ -39,33 +39,51 @@ class Bag:
         return self.da.length()
 
     def add(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """add method which adds values into array"""
+        self.da.append(value) # calls append method from dynamic array class
         pass
 
     def remove(self, value: object) -> bool:
-        """
-        TODO: Write this implementation
-        """
+        """remove function takes the range of the bag and iterates through it. If an element matches the value,
+        it calls the remove_at_index method to remove and returns True"""
+        for i in range(self.size()): # iterate throughout the whole array
+            if self.da.get_at_index(i) == value: # checks if element matches value
+                self.da.remove_at_index(i) # removes at the index
+                return True
+        return False
         pass
 
     def count(self, value: object) -> int:
-        """
-        TODO: Write this implementation
-        """
+        """count function sets a total variable to count all the elements. Then it iterates throughout the array, and
+        adds all the elements that match the value"""
+        total_count = 0 # initialize count
+        for i in range(self.size()): # iterate throughout the array
+            if self.da.get_at_index(i) == value: # checks if element matches value
+                total_count += 1 # add to count
+        return total_count
         pass
 
     def clear(self) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """clear function clears the content of the bag. It iterates throughout the array and starts at index 0
+        until it reaches the end"""
+        for i in range(self.size()):  # iterate throughout the array
+            self.da.remove_at_index(0) # starts at index 0 and goes throughout the entire array
+        return
         pass
 
     def equal(self, second_bag: object) -> bool:
-        """
-        TODO: Write this implementation
-        """
+        """equal function checks if bag is equal to the second bag by the number of elements and elements within the
+         array. We iterate throughout both arrays and check to see if they match elements and size."""
+        if self.size() != second_bag.size(): # checks if the size matches
+            return False
+
+        for i in range(self.size()): # iterate throughout the first array
+            for k in range(self.size()): # iterate throughout the second array
+                if self.da.get_at_index(i) == second_bag.da.get_at_index(k): # checks if elements match
+                    return True # return True
+            return False # else return False
+
+        return True # return True for empty bags
         pass
 
 
