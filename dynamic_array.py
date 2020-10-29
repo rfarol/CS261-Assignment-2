@@ -1,6 +1,6 @@
 # Course: CS261 - Data Structures
-# Student Name:
-# Assignment:
+# Student Name: Ryan Farol
+# Assignment: Assignment 2
 # Description:
 # Last revised:
 
@@ -58,63 +58,110 @@ class DynamicArray:
         return self.size
 
     def resize(self, new_capacity: int) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """resizes the capacity of the dynamic array. If new_capacity is 0 or < size, it passes/exits.
+        Updates the capacity in the data variable as well."""
+        if new_capacity <= self.size: # passes if new capacity is 0 or less than size
+            pass
+        else:
+            new_array = StaticArray(new_capacity) # create new static array with new capacity
+            for i in range(self.size): # scans old array
+                new_array[i] = self.data[i] # moves elements to new array
+            self.data = new_array # initializes new array
+            self.capacity = new_capacity # initialize new capacity
         pass
 
     def append(self, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """adds element to the end of the list. if size is full, doubles the capacity"""
+        if self.size == self.capacity: # checks if array is full and doubles the capacity
+            self.resize(2 * self.capacity)
+        self.data[self.size] = value # adds the value to the array
+        self.size = self.size + 1 # increments
         pass
 
     def insert_at_index(self, index: int, value: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """inserts at index within the dynamic array"""
+        if index > self.size: # checks if index is bigger than the size, returns function
+            raise DynamicArrayException()
+        elif self.size == self.capacity:  # checks if array is full and doubles the capacity
+            self.resize(2 * self.capacity)
+        for i in range(self.size - 1, index - 1, -1): # iterates throughout the array
+            self.data[i + 1] = self.data[i] # moves the elements on spot to the right
+        self.data[index] = value # places value in the proposed index
+        self.size = self.size + 1
         pass
 
     def get_at_index(self, index: int) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """checks if index is within range and returns exception if not within range. If index is withn range, the value
+        is returned"""
+        if not 0 <= index < self.size: # checks if index is within appropriate range
+            raise DynamicArrayException() # returns exception
+        return self.data[index]  # else returns the index entered
         pass
 
     def remove_at_index(self, index: int) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """removes value at index. If the number of elements is strictly less than 1/4 capacity, then the capacity is
+        reduced twice the number of current elements, but capacity reduction should not happen less than 10 elements."""
+        if index >= self.size or index < 0: # checks if index is bigger than the size or 0, returns exception
+            raise DynamicArrayException()
+        if self.size < self.capacity/4: # checks if elements is less than 1/4 the capacity
+            if self.capacity <= 14: # since the capacity is intialized at 4, it cant go lower than 14.
+                self.capacity = 10 # if lower than 14, capacity will stay at 10
+            else:
+                self.capacity = self.size * 2 # else capacity will be reduced to double the size of current elements
+        if index == self.size - 1: # checks if the index is at the end of the list
+            self.data[index] = 0 # sets index to 0
+            self.size = self.size - 1 # moves the values over to the left
+            return
+
+        for i in range(index, (self.size)-1): # iterates throughout the array as the index starting point
+            self.data[i] = self.data[i + 1]  # moves them over once to the right
+        self.data[self.size - 1] = 0 # delete element at index
+        self.size = self.size - 1 # moves the values back to the left
         pass
 
     def slice(self, start_index: int, quantity: int) -> object:
-        """
-        TODO: Write this implementation
-        """
-        return DynamicArray()
+        """slices current Dynamic Array object and puts it into a new Dynamic array"""
+        da_slice = DynamicArray() #call dynamic array class
+        if start_index >= self.size or start_index < 0 or start_index+quantity > self.size or quantity < 0:
+            # checks if index is bigger than the size, index is 0, end of the index is bigger than the size
+            # and quanitity is 0. If any, raise exception
+            raise DynamicArrayException()
+        for i in range(start_index, start_index+quantity): # takes range of the start index and add the start index and
+            # quantity to get the end of the index
+            da_slice.append(self.data[i]) # call append function to add to the end of the new dynamic array
+        return da_slice
+
 
     def merge(self, second_da: object) -> None:
-        """
-        TODO: Write this implementation
-        """
+        """this function takes the a new dynamic array and appends it to the end of the current"""
+        for i in range(second_da.size): # iterates throughout the whole array and appends to the end of the current dynamic array
+            self.append(second_da.data[i])
         pass
 
     def map(self, map_func) -> object:
-        """
-        TODO: Write this implementation
-        """
-        pass
+        """takes the map function and changes the values of the current dynamic array and puts it in a new array"""
+        new_array = DynamicArray() # new array
+        for i in range(0,self.size):  # scans old array
+            new_array.append(map_func(self.data[i])) #adds to new array
+        return new_array
+
+
 
     def filter(self, filter_func) -> object:
-        """
-        TODO: Write this implementation
-        """
+        """takes a filter function and returns those elements that are True into a new dynamic array"""
+        new_array = DynamicArray() # new array
+        for i in range(0,self.size):  # scans old array
+            if filter_func(self.data[i]) == True: # checks if True
+                new_array.append(self.data[i]) # adds only True elements into new Array
+        return new_array
         pass
 
     def reduce(self, reduce_func, initializer=None) -> object:
-        """
-        TODO: Write this implementation
-        """
+        result = 0
+        for i in range(0, self.size):
+            reduce_func(self.data[i], self.data[i+1])
+            result +=1
+            return result
         pass
 
 
@@ -222,7 +269,7 @@ if __name__ == "__main__":
     da.remove_at_index(2)
     print(da)
 
-    # remove_at_index - example 2
+    print("\n# remove_at_index - example 2")
     da = DynamicArray([1024])
     print(da)
     for i in range(17):
