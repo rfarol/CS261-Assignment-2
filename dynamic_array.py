@@ -165,13 +165,13 @@ class DynamicArray:
         if initializer == None: # if None, index at the start of the array and keep adding until fully interated
             result = self.data[0]
             for i in range(1, self.size):
-               result += reduce_func(0, self.data[i])
+               result = result + reduce_func(0, self.data[i])
             return result
-
-        result += initializer # if there is an initializer, index at it at the start
-        for i in range(0, self.size): # start the iteration from index 0 and iterate throughout the entire array
-            result += reduce_func(0, self.data[i])
-        return result
+        else:
+            result = result + initializer # if there is an initializer, index at it at the start
+            for i in range(0, self.size): # start the iteration from index 0 and iterate throughout the entire array
+                result = result + reduce_func(0, self.data[i])
+            return result
 
 
 
@@ -192,9 +192,9 @@ if __name__ == "__main__":
     print("\n# resize - example 2")
     da = DynamicArray([1, 2, 3, 4, 5, 6, 7, 8])
     print(da)
-    da.resize(948)
+    da.resize(9)
     print(da)
-    da.resize(8)
+    da.resize(4)
     print(da)
 
     print("\n# append - example 1")
